@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} % любая желаемая кодировка
+\usepackage[russian,english]{babel}
+\usepackage[pdftex,unicode]{hyperref}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{imgs/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpeg}
+\usepackage{geometry} \geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2.5cm,rmargin=1.5cm}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\part*
+{
+	Атомы, ящики, родители, дети и hex
+}
+\paragraph
+{
+	Файл MPEG-4 состоит из дискретных элементов, которые называются "атомы" (хорошо, их называли "атомы" в первой сспецификации, сейчас их в основном называют "ящики"). 
+	Формат атома:\\
+}
+
+\includegraphics{atom}
+
+\paragraph
+{
+	Всё остальное помимо этих основных 8 байт является необязательным и определяется иерархией, в которой оно находятся (атомы moov.udta.meta.XXXX имею формат, определенный QuickTime) или определяется самим атомом.
+	Атом ftyp ВСЕГДА первый и имеет определённый тип формата - он говорит о типе этого файла и базовом управлении версиями структур атомов\\
+}
+
+\paragraph
+{
+	В приведённом выше примере атом moov имеет длину 0x00001D38 или 7480 байт.
+	Следующее сразу за именем moov тем не менее так же является новым атомом.
+	Это mvhd атом, и его длина - 0x0000006C или 108 байт.
+	Т.к. 108 байт меньше чем 7480, то атом mvhd - дочерний от атома moov.
+	Спецификация MPEG-4 говорит, что атом может быть или родителем (как moov - родитель для mvhd), или может нести какую-то информацию в себе (как ftyp и mvhd), но не оба варианта одновременно.\\
+}
+\end{document}
